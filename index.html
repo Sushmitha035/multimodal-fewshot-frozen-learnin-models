@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Multimodal Few-Shot Learning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #1a1a1a;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007acc;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome!</h1>
-  <p>This project explores few-shot learning using frozen language models and multimodal inputs.</p>
+  <h1>Multimodal Few-Shot Learning with Frozen Language Models</h1>
+  <p>
+    This project explores how to perform few-shot learning using frozen language models in a multimodal setting.
+    We combine pre-trained vision and language encoders, keeping them frozen, and only train lightweight adapters or fusion layers.
+  </p>
+
+  <h2>🧠 Key Features</h2>
+  <ul>
+    <li>Frozen large language model (e.g., <code>LLM</code>)</li>
+    <li>Multimodal inputs (e.g., text + image)</li>
+    <li>Lightweight trainable fusion layers</li>
+    <li>Few-shot setup (1-shot, 5-shot learning)</li>
+  </ul>
+
+  <h2>📁 Repository</h2>
+  <p>
+    View the full code on GitHub: <br />
+    <a href="https://github.com/yourusername/your-repo" target="_blank">github.com/yourusername/your-repo</a>
+  </p>
+
+  <h2>📊 Results</h2>
+  <p>
+    Evaluation is done on [Dataset Name], and our method achieves strong performance with only a handful of examples per class.
+  </p>
+
+  <h2>📌 How It Works</h2>
+  <ol>
+    <li>Encode visual and textual input using frozen models</li>
+    <li>Project both embeddings into a shared space</li>
+    <li>Fuse representations via cross-attention or concatenation</li>
+    <li>Train classifier or task head using few-shot examples</li>
+  </ol>
+
+  <a class="button" href="https://github.com/yourusername/your-repo" target="_blank">🔗 View Code on GitHub</a>
 </body>
 </html>
+
