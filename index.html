@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🚀 Multimodal Few-Shot Learning with Frozen Models</title>
+  <title>Multimodal Few-Shot Learning with Frozen Models</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -13,77 +13,88 @@
       color: #333;
       line-height: 1.6;
     }
-    h1 {
-      font-size: 2.8em; margin-bottom: 0.2em; color: #222;
-    }
+    h1 { font-size: 2.5em; margin-bottom: 0.2em; color: #222; }
     h1 em { font-size: 0.6em; color: #555; }
     h2 {
-      display: flex; align-items: center;
-      font-size: 1.8em; margin-top: 2.2em;
-      border-bottom: 2px solid #eee; padding-bottom: 0.3em;
+      font-size: 1.8em;
+      margin-top: 2em;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.3em;
       color: #111;
     }
-    h2 .emoji { margin-right: 0.6em; }
     p, ul, ol { font-size: 1.05em; margin-top: 1em; }
     ul li, ol li { margin-bottom: 0.6em; }
     pre {
-      background: #f4f4f8; padding: 16px;
-      border-radius: 6px; overflow-x: auto;
-      font-size: 0.95em; margin-top: 1em;
+      background: #f4f4f8;
+      padding: 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.95em;
+      margin-top: 1em;
     }
     code {
       font-family: Consolas, monospace;
-      background: #eef; padding: 2px 4px; border-radius: 4px;
+      background: #eef;
+      padding: 2px 4px;
+      border-radius: 4px;
     }
     table {
-      width: 100%; border-collapse: collapse; margin: 1.2em 0;
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2em 0;
     }
     th, td {
-      border: 1px solid #ddd; padding: 8px 12px;
+      border: 1px solid #ddd;
+      padding: 8px 12px;
       text-align: center;
     }
     th { background: #f0f0f8; font-weight: bold; }
     tr:nth-child(even) { background: #fafaff; }
-    .figure { text-align: center; margin: 2em 0; }
+    .figure {
+      text-align: center;
+      margin: 2em 0;
+    }
     .figure img {
-      max-width: 100%; border-radius: 8px;
+      max-width: 100%;
+      border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     .figure figcaption {
-      font-size: 0.9em; color: #555; margin-top: 0.4em;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 0.4em;
     }
   </style>
 </head>
 <body>
 
-  <h1>🚀 Multimodal Few-Shot Learning with Frozen Models</h1>
-  <p><em>by Sushmitha Raparla</em></p>
+<h1>Multimodal Few-Shot Learning with Frozen Models</h1>
+<p><em>by Sushmitha Raparla</em></p>
 
-  <h2><span class="emoji">🎯</span>Motivation</h2>
-  <p>
-    Pre-trained vision & language encoders are powerful but costly to fine-tune.  
-    This project explores freezing both backbones and training only a lightweight fusion head
-    in a few-shot setting to maintain high performance at minimal computational cost.
-  </p>
+<h2>🎯 Motivation</h2>
+<p>
+Pre-trained vision & language encoders are powerful but costly to fine-tune.
+This project explores freezing both backbones and training only a lightweight fusion head in a few-shot setting to maintain high performance at minimal computational cost.
+</p>
 
-  <h2><span class="emoji">🔍</span>Connection to Multimodal Learning</h2>
-  <p>
-    CLIP pioneered frozen encoder use via contrastive learning.  
-    ALBEF & Flamingo added fusion but still fine-tuned large models.  
-    Prompt-tuning and adapters showed it's possible to learn with minimal updates.  
-    <strong>Frozen-main</strong> unites these ideas: freeze vision/text encoders, train a small cross-modal fusion head.
-  </p>
+<h2>🔍 Connection to Multimodal Learning</h2>
+<p>
+CLIP pioneered frozen encoder use via contrastive learning.
+ALBEF & Flamingo added fusion but still fine-tuned large models.
+Prompt-tuning and adapters showed it's possible to learn with minimal updates.
+Frozen-main unites these ideas: freeze vision/text encoders, train a small cross-modal fusion head.
+</p>
 
-  <h2><span class="emoji">💡</span>Key Insights</h2>
-  <ul>
-    <li>Hydra config simplifies dataset switching (e.g., CC3M ↔ COCO).</li>
-    <li>The “Frozen” optimizer restricts updates to the fusion head.</li>
-    <li>Modular repo layout (<code>bin/</code>, <code>config/</code>, <code>notebooks/</code>) is intuitive.</li>
-    <li>Experiments are easy to configure using YAML + CLI.</li>
-  </ul>
+<h2>💡 Key Insights</h2>
+<ul>
+  <li>Hydra config simplifies dataset switching (e.g., CC3M ↔ COCO).</li>
+  <li>The “Frozen” optimizer restricts updates to the fusion head.</li>
+  <li>Modular repo layout (<code>bin/</code>, <code>config/</code>, <code>notebooks/</code>) is intuitive.</li>
+  <li>Experiments are easy to configure using YAML + CLI.</li>
+</ul>
 
-  <h2><span class="emoji">🛠️</span>Running the Code</h2>
-  <pre><code># Unzip & install
+<h2>🛠️ Running the Code</h2>
+<pre><code># Unzip & install
 import zipfile
 zipfile.ZipFile('frozen-main.zip').extractall()
 !pip install -q -e frozen-main
@@ -91,57 +102,56 @@ zipfile.ZipFile('frozen-main.zip').extractall()
 # Directory structure
 import os
 print(os.listdir('frozen-main'))
-  </code></pre>
-
-  <pre><code>['.gitignore', 'LICENSE', 'README.md', 'bin',
+</code></pre>
+<pre><code>['.gitignore', 'LICENSE', 'README.md', 'bin',
  'config', 'environment.yml', 'frozen',
  'notebooks', 'setup.py']
-  </code></pre>
+</code></pre>
 
-  <h2><span class="emoji">📊</span>Final Results</h2>
-  <p>Average accuracy across 3 seeds on CC3M:</p>
-  <table>
-    <thead><tr>
-      <th>Shots</th><th>Frozen Head</th><th>Full Finetune</th>
-    </tr></thead>
-    <tbody>
-      <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
-      <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
-      <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
-    </tbody>
-  </table>
+<h2>📊 Final Results</h2>
+<p>Average accuracy across 3 seeds on CC3M:</p>
+<table>
+  <thead><tr>
+    <th>Shots</th><th>Frozen Head</th><th>Full Finetune</th>
+  </tr></thead>
+  <tbody>
+    <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
+    <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
+    <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+  </tbody>
+</table>
 
-  <div class="figure">
-    <img src="figs/few_shot_results.png" alt="Few-shot accuracy bar chart">
-    <figcaption>Figure 1: Few-shot accuracy on CC3M for Frozen Head vs. Finetune.</figcaption>
-  </div>
+<div class="figure">
+  <img src="figs/fewshot_barplot.png" alt="Few-shot accuracy bar chart">
+  <figcaption>Figure 1: Few-shot accuracy on CC3M for Frozen Head vs. Finetune.</figcaption>
+</div>
 
-  <h2><span class="emoji">📐</span>Architecture Overview</h2>
-  <div class="figure">
-    <img src="figs/fusion_architecture.svg" alt="Fusion architecture diagram">
-    <figcaption>Figure 2: Frozen vision & language encoders feeding into a learnable fusion head.</figcaption>
-  </div>
+<h2>📐 Architecture Overview</h2>
+<div class="figure">
+  <img src="figs/fusion_architecture.svg" alt="Fusion architecture diagram">
+  <figcaption>Figure 2: Frozen vision & language encoders feeding into a learnable fusion head.</figcaption>
+</div>
 
-  <h2><span class="emoji">🧠</span>Reflections</h2>
-  <ul>
-    <li><strong>Surprise:</strong> High performance with frozen encoders!</li>
-    <li><strong>Next Steps:</strong>
-      <ul>
-        <li>Try other datasets: COCO, VQA, ImageNet.</li>
-        <li>Compare fusion types: concat vs. cross-attention.</li>
-        <li>Benchmark latency and memory footprint.</li>
-      </ul>
-    </li>
-  </ul>
+<h2>🧠 Reflections</h2>
+<ul>
+  <li><strong>Surprise:</strong> High performance with frozen encoders!</li>
+  <li><strong>Next Steps:</strong>
+    <ul>
+      <li>Try other datasets: COCO, VQA, ImageNet.</li>
+      <li>Compare fusion types: concat vs. cross-attention.</li>
+      <li>Benchmark latency and memory footprint.</li>
+    </ul>
+  </li>
+</ul>
 
-  <h2><span class="emoji">📚</span>References</h2>
-  <ul>
-    <li>Radford et al., “CLIP” (2021)</li>
-    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
-    <li>Tsimpoukelli et al., “Multimodal Few-Shot with Frozen LLMs” (arXiv ’22)</li>
-    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
-    <li><code>frozen-main</code> GitHub & Hydra configs</li>
-  </ul>
+<h2>📚 References</h2>
+<ul>
+  <li>Radford et al., “CLIP” (2021)</li>
+  <li>Wang et al., “ALBEF” (ICCV ’21)</li>
+  <li>Tsimpoukelli et al., “Multimodal Few-Shot with Frozen LLMs” (arXiv ’22)</li>
+  <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+  <li><code>frozen-main</code> GitHub & Hydra configs</li>
+</ul>
 
 </body>
 </html>
