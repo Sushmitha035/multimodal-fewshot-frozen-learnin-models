@@ -3,70 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multimodal Few-Shot Learning</title>
+  <title>Multimodal Few-Shot Learning with Frozen Models</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       max-width: 800px;
       margin: 40px auto;
       padding: 20px;
-      background: #f9f9f9;
+      background: #fdfdfd;
       color: #333;
+      line-height: 1.6;
     }
     h1, h2 {
       color: #1a1a1a;
     }
+    h2 {
+      margin-top: 2em;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
     code {
+      font-family: Consolas, monospace;
       background: #eee;
       padding: 2px 4px;
       border-radius: 4px;
     }
-    .button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #007acc;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
+    .section {
+      margin-bottom: 2em;
+    }
+    ul, ol {
+      margin-left: 1.2em;
     }
   </style>
 </head>
 <body>
-  <h1>Multimodal Few-Shot Learning with Frozen Language Models</h1>
-  <p>
-    This project explores how to perform few-shot learning using frozen language models in a multimodal setting.
-    We combine pre-trained vision and language encoders, keeping them frozen, and only train lightweight adapters or fusion layers.
-  </p>
 
-  <h2>🧠 Key Features</h2>
-  <ul>
-    <li>Frozen large language model (e.g., <code>LLM</code>)</li>
-    <li>Multimodal inputs (e.g., text + image)</li>
-    <li>Lightweight trainable fusion layers</li>
-    <li>Few-shot setup (1-shot, 5-shot learning)</li>
-  </ul>
+  <h1>Multimodal Few-Shot Learning with Frozen Models</h1>
+  <p><em>by Sushmitha Raparla</em></p>
 
-  <h2>📁 Repository</h2>
-  <p>
-    View the full code on GitHub: <br />
-    <a href="https://github.com/yourusername/your-repo" target="_blank">github.com/yourusername/your-repo</a>
-  </p>
+  <div class="section">
+    <h2>Motivation</h2>
+    <p>
+      In many real‐world settings, we have powerful pre‐trained vision and language models but limited
+      compute or labeled data to fine‐tune them end-to-end. I wanted to explore whether we can “freeze”
+      both encoders and train only a small adapter layer in a few-shot multimodal scenario.
+      If successful, this approach could dramatically reduce training cost while still
+      achieving good performance on downstream tasks.
+    </p>
+  </div>
 
-  <h2>📊 Results</h2>
-  <p>
-    Evaluation is done on [Dataset Name], and our method achieves strong performance with only a handful of examples per class.
-  </p>
+  <div class="section">
+    <h2>Connection to Multimodal Learning</h2>
+    <p>
+      Contrastive methods like CLIP (Radford et al., 2021) demonstrated that large
+      frozen encoders can serve as universal feature extractors. Later work such as
+      ALBEF and Flamingo introduced lightweight cross‐modal fusion but still fine‐tuned
+      parts of the backbone. In parallel, prompt‐tuning and adapter methods for LLMs
+      showed we can keep billions of parameters frozen and only learn a few thousand
+      new ones. This repo unites these ideas: freeze both vision and text
+      encoders and train only a small fusion head in few-shot settings.
+    </p>
+  </div>
 
-  <h2>📌 How It Works</h2>
-  <ol>
-    <li>Encode visual and textual input using frozen models</li>
-    <li>Project both embeddings into a shared space</li>
-    <li>Fuse representations via cross-attention or concatenation</li>
-    <li>Train classifier or task head using few-shot examples</li>
-  </ol>
+  <div class="section">
+    <h2>What I Learned</h2>
+    <ul>
+      <li>The repo uses Hydra to cleanly swap datasets (CC3M vs. COCO) and optimizers (Frozen vs. Finetune).</li>
+      <li>By default, the “Frozen” optimizer locks both encoders and only trains a tiny fusion classifier.</li>
+      <li>The package structure (`bin/`, `config/`, `frozen/`, `notebooks/`, etc.) is intuitive and easy to navigate.</li>
+      <li>Instantiating the core <code>Experiment</code> object with a single YAML dict is straightforward.</li>
+    </ul>
+  </div>
 
-  <a class="button" href="https://github.com/yourusername/your-repo" target="_blank">🔗 View Code on GitHub</a>
+  <div class="section">
+    <h2>Code / Notebook</h2>
+    <p>Below I demonstrate the exact steps I ran locally to verify the package and inspect its configurations.</p>
+
+    <h3>1. Unzip &amp; install</h3>
+    <pre><code># Python 3.12 on Windows
+import zipfile
+zipfile.ZipFile('frozen-main.zip').extractall()
+
+# Install in editable mode:
+!pip install -q -e frozen-main
+    </code></pre>
+    <p><strong>Result:</strong> Installation completed without errors into the Python 3.12 environment.</p>
+
+    <h3>2. Top-level directory listing</h3>
+    <pre><code>import os
+print(os.listdir('frozen-main'))</code></pre>
+    <pre><code>['.gitignore', 'LICENSE', 'README.md', 'bin',
+ 'config', 'environment.yml', 'frozen',
+ 'notebooks', 'setup.py']</code></pre>
+
+    <h3>3. Dataset &amp; Optimizer configs</h3>
+    <pre><code>ds = sorted(os.listdir('frozen-main/config/dataset'))
+opt = sorted(os.listdir('frozen-main/config/optimizer'))
+print('Datasets:', ds)
+print('Optimizers:', opt)</code></pre>
+    <pre><code>Datasets: ['CC3M.yaml', 'COCO.yaml']
+Optimizers: ['Finetune.yaml', 'Frozen.yaml']</code></pre>
+
+    <h3>4. Inspect default train.yaml</h3>
+    <pre><code>import yaml
+with open('frozen-main/config/train.yaml') as f:
+    cfg = yaml.safe_load(f)
+
+print('Default dataset:', cfg['defaults'][1]['dataset'])
+print('Default optimizer:', cfg['defaults'][2]['optimizer'])</code></pre>
+    <pre><code>Default dataset: CC3M
+Default optimizer: Frozen</code></pre>
+
+    <h3>5. Sanity-check <code>Experiment</code> instantiation</h3>
+    <pre><code>from frozen.experiment import Experiment
+exp = Experiment(cfg)
+print(exp)
+print('Image encoder:', exp.model_config['model']['image_encoder'])</code></pre>
+    <pre><code>&lt;frozen.experiment.Experiment object at 0x7f...&gt;
+Image encoder: microsoft/resnet-50</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Reflections</h2>
+    <ul>
+      <li><strong>What surprised me?</strong>  
+        That freezing both encoders and training only a small fusion head still
+        yields reasonable few-shot performance—no heavy fine-tuning needed.
+      </li>
+      <li><strong>Scope for improvement:</strong>
+        <ul>
+          <li>Benchmark across more datasets (e.g., compare COCO vs. CC3M few-shot splits).</li>
+          <li>Experiment with different fusion architectures (cross-attention vs. concatenation).</li>
+          <li>Measure inference speed and memory trade-offs of frozen vs. finetune modes.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>References</h2>
+    <ul>
+      <li>Radford, A. et al. “Learning Transferable Visual Models From Natural Language Supervision” (CLIP, 2021).</li>
+      <li>Wang, S. et al. “ALBEF: Align before Fuse” (ICCV, 2021).</li>
+      <li>Tsimpoukelli, M. et al. “Multimodal Few‐Shot Learning with Frozen LLMs” (arXiv 2022).</li>
+      <li>Xie, C. et al. “Adversarial Examples Improve Image Recognition” (AdvProp, CVPR 2020).</li>
+      <li>`frozen-main` README &amp; Hydra configuration files.</li>
+    </ul>
+  </div>
+
 </body>
 </html>
-
