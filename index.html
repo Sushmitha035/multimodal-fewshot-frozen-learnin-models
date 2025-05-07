@@ -62,48 +62,47 @@
   <h2><span class="emoji">🎯</span>Motivation</h2>
   <p>
     Pre-trained vision & language encoders are powerful but costly to fine-tune.  
-    I wanted to see if freezing both backbones and training only a tiny fusion layer
-    in a few-shot setting could keep performance high while slashing compute.
+    This project explores freezing both backbones and training only a lightweight fusion head
+    in a few-shot setting to maintain high performance at minimal computational cost.
   </p>
 
   <h2><span class="emoji">🔍</span>Connection to Multimodal Learning</h2>
   <p>
     CLIP pioneered frozen encoder use via contrastive learning.  
     ALBEF & Flamingo added fusion but still fine-tuned large models.  
-    Prompt-tuning and adapters for LLMs proved you can freeze billions of params
-    and learn just a few thousand.  
-    <strong>Frozen-main</strong> unites these ideas: freeze vision/text encoders,
-    train only a small cross-modal fusion head in 1/5/10-shot experiments.
+    Prompt-tuning and adapters showed it's possible to learn with minimal updates.  
+    <strong>Frozen-main</strong> unites these ideas: freeze vision/text encoders, train a small cross-modal fusion head.
   </p>
 
-  <h2><span class="emoji">💡</span>What I Learned</h2>
+  <h2><span class="emoji">💡</span>Key Insights</h2>
   <ul>
-    <li>Hydra config makes swapping between CC3M & COCO trivial.</li>
-    <li>“Frozen” optimizer truly locks encoders; only the fusion head learns.</li>
-    <li>Repo layout (<code>bin/</code>, <code>config/</code>, <code>frozen/</code>, <code>notebooks/</code>) is clean.</li>
-    <li><code>Experiment</code> API instantiates from a single YAML dict—very ergonomic.</li>
+    <li>Hydra config simplifies dataset switching (e.g., CC3M ↔ COCO).</li>
+    <li>The “Frozen” optimizer restricts updates to the fusion head.</li>
+    <li>Modular repo layout (<code>bin/</code>, <code>config/</code>, <code>notebooks/</code>) is intuitive.</li>
+    <li>Experiments are easy to configure using YAML + CLI.</li>
   </ul>
 
-  <h2><span class="emoji">🛠️</span>Code / Notebook</h2>
-  <pre><code># 1. Unzip & install
+  <h2><span class="emoji">🛠️</span>Running the Code</h2>
+  <pre><code># Unzip & install
 import zipfile
 zipfile.ZipFile('frozen-main.zip').extractall()
 !pip install -q -e frozen-main
 
-# 2. List top-level directory
+# Directory structure
 import os
 print(os.listdir('frozen-main'))
   </code></pre>
+
   <pre><code>['.gitignore', 'LICENSE', 'README.md', 'bin',
  'config', 'environment.yml', 'frozen',
  'notebooks', 'setup.py']
   </code></pre>
 
-  <h2><span class="emoji">📊</span>Results</h2>
-  <p>Few-shot accuracy on CC3M val (average over 3 seeds):</p>
+  <h2><span class="emoji">📊</span>Final Results</h2>
+  <p>Average accuracy across 3 seeds on CC3M:</p>
   <table>
     <thead><tr>
-      <th>Shots</th><th>Frozen Head</th><th>Finetune (full)</th>
+      <th>Shots</th><th>Frozen Head</th><th>Full Finetune</th>
     </tr></thead>
     <tbody>
       <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
@@ -112,20 +111,25 @@ print(os.listdir('frozen-main'))
     </tbody>
   </table>
 
-  <h2><span class="emoji">📐</span>Architecture Diagram</h2>
-  <figure class="figure">
-    <img src="figs/fusion_architecture.svg" alt="Fusion architecture diagram">
-    <figcaption>Figure 1: Frozen image & text encoders feeding a small fusion head.</figcaption>
-  </figure>
+  <div class="figure">
+    <img src="figs/few_shot_results.png" alt="Few-shot accuracy bar chart">
+    <figcaption>Figure 1: Few-shot accuracy on CC3M for Frozen Head vs. Finetune.</figcaption>
+  </div>
 
-  <h2><span class="emoji">🤔</span>Reflections</h2>
+  <h2><span class="emoji">📐</span>Architecture Overview</h2>
+  <div class="figure">
+    <img src="figs/fusion_architecture.svg" alt="Fusion architecture diagram">
+    <figcaption>Figure 2: Frozen vision & language encoders feeding into a learnable fusion head.</figcaption>
+  </div>
+
+  <h2><span class="emoji">🧠</span>Reflections</h2>
   <ul>
-    <li><strong>Surprise:</strong> Frozen parameters still drive strong few-shot performance!</li>
-    <li><strong>Scope for improvement:</strong>
+    <li><strong>Surprise:</strong> High performance with frozen encoders!</li>
+    <li><strong>Next Steps:</strong>
       <ul>
-        <li>Run on COCO & other datasets for broader validation.</li>
-        <li>Compare cross-attention vs. simple concatenation adapters.</li>
-        <li>Profile inference speed & memory for frozen vs. finetune modes.</li>
+        <li>Try other datasets: COCO, VQA, ImageNet.</li>
+        <li>Compare fusion types: concat vs. cross-attention.</li>
+        <li>Benchmark latency and memory footprint.</li>
       </ul>
     </li>
   </ul>
@@ -136,9 +140,10 @@ print(os.listdir('frozen-main'))
     <li>Wang et al., “ALBEF” (ICCV ’21)</li>
     <li>Tsimpoukelli et al., “Multimodal Few-Shot with Frozen LLMs” (arXiv ’22)</li>
     <li>Xie et al., “AdvProp” (CVPR ’20)</li>
-    <li><code>frozen-main</code> README & Hydra config files</li>
+    <li><code>frozen-main</code> GitHub & Hydra configs</li>
   </ul>
 
 </body>
 </html>
+
 
