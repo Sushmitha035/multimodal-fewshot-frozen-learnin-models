@@ -66,67 +66,89 @@
     li {
       margin-bottom: 8px;
     }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      background: #fff;
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .section-title {
+      margin-top: 3em;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 8px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Multimodal Few-Shot Learning<br><small>Frozen Encoders, Fresh Ideas</small></h1>
-  <p><em>July 2025 · Raparla Sushmitha</em></p>
+  <!-- PART 1: Your Original Page Layout -->
 
-  <h2>🎯 Motivation</h2>
+  <h1>Multimodal Few-Shot Learning <small>Frozen Encoders, Fresh Ideas</small></h1>
+  <p><em>By Raparla Sushmitha</em></p>
+
+  <h2 class="section-title">About the Project</h2>
+  <p>
+    This project explores how frozen pre-trained vision and language encoders can be adapted for few-shot multimodal learning tasks. We investigate lightweight fusion modules, performance across different shots, and compare frozen vs. full fine-tuning methods.
+  </p>
+
+  <div class="card">
+    <h3>Highlights</h3>
+    <ul>
+      <li>Uses CLIP & Frozen LMs for vision-language alignment</li>
+      <li>Few-shot learning on CC3M dataset</li>
+      <li>Modular codebase for rapid experimentation</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Technologies Used</h3>
+    <ul>
+      <li>PyTorch, HuggingFace Transformers</li>
+      <li>CLIP, Flamingo-style Fusion, Adapter layers</li>
+      <li>WandB for experiment tracking</li>
+    </ul>
+  </div>
+
+  <!-- PART 2: Blog-Style Post (from GitHub Screenshot) -->
+
+  <h2 class="section-title">📌 Title & Your Name</h2>
+  <p><strong>Multimodal Few-Shot Learning: Frozen Encoders, Fresh Ideas</strong><br>Raparla Sushmitha</p>
+
+  <h2>🎯 Motivation – Why did you pick this topic?</h2>
   <p>
     Pre-trained vision and language encoders like CLIP are incredibly powerful—but fine-tuning them can be expensive.
-    We ask: <strong>can we achieve strong few-shot performance by freezing these models and training only a lightweight fusion head?</strong>
+    I was fascinated by the idea of leveraging these models as-is and still achieving good performance. The challenge of improving few-shot learning without costly training drove me to this topic.
   </p>
-  <p>Spoiler: yes, we can.</p>
 
-  <h2>🔍 Rethinking Multimodal Learning</h2>
+  <h2>🔁 How does it connect with past and current work?</h2>
   <p>
-    CLIP’s zero-shot ability was a turning point for multimodal models. Later methods like ALBEF and Flamingo introduced fusion mechanisms but still required fine-tuning large backbones. 
-    Inspired by prompt-tuning and adapter methods, we explore a minimalist approach: <strong>frozen vision and text encoders, train only a cross-modal fusion head</strong>.
-  </p>
-  <p>This setup drastically reduces computational cost—while still delivering competitive results.</p>
-
-  <h2>📚 Historical Context</h2>
-  <p>
-    Multimodal learning has evolved from late fusion pipelines to deeply integrated models. CLIP by OpenAI (2021) unified vision and text via contrastive pretraining, enabling zero-shot capabilities. 
-    ALBEF (ICCV 2021) pushed this further by using momentum distillation. More recently, methods like Flamingo (DeepMind, 2022) blend frozen LLMs with learned visual adapters. Our method extends this trajectory:
-    <strong>minimal updates, maximum reuse.</strong>
+    This work draws from CLIP’s success in zero-shot vision-language tasks and expands it with ideas from Flamingo and ALBEF.
+    Where those models require full fine-tuning, we take inspiration from prompt tuning and adapters to push for efficient learning using frozen backbones.
+    This fits into the broader trend in multimodal learning that seeks to reduce compute while improving generalization.
   </p>
 
-  <h2>🧠 What We Learned</h2>
+  <h2>📘 Explain your learning from this work</h2>
   <ul>
-    <li><strong>Frozen backbones</strong> are extremely effective in few-shot settings.</li>
-    <li><strong>Cross-modal fusion</strong> doesn’t need to be deep—2–3 layers are often enough.</li>
-    <li><strong>Reproducibility</strong> improves when fewer parameters are updated.</li>
-    <li>CLIP’s representations are rich enough to generalize with minimal tuning.</li>
+    <li>Frozen models retain rich representations that are highly reusable.</li>
+    <li>Cross-modal fusion can be simple but still effective.</li>
+    <li>Few-shot learning doesn't need large updates—just smart ones.</li>
+    <li>Modular experiment configs make testing faster and reproducible.</li>
   </ul>
 
-  <h2>💻 Code & Setup</h2>
-  <pre><code># Install the code
-!unzip frozen-main.zip
+  <h2>💻 Code / Notebook</h2>
+  <p>Install the codebase and experiment:</p>
+  <pre><code>!unzip frozen-main.zip
 !pip install -q -e frozen-main</code></pre>
-
-  <pre><code># Project layout
-import os
-print(os.listdir('frozen-main'))
-# ['.gitignore', 'LICENSE', 'README.md', 'bin',
-#  'config', 'environment.yml', 'frozen',
-#  'notebooks', 'setup.py']</code></pre>
-
-  <p>
-    The training is modular thanks to <strong>Hydra</strong> configuration files. 
-    Here's how we train using CC3M data with frozen encoders and a 3-layer fusion head.
-  </p>
-
-  <pre><code># Example config call
-python bin/train --config-name=train dataset=CC3M optimizer=Finetune</code></pre>
-
-  <p>Each run logs accuracy per shot setting and tracks validation loss. We use OPT-style language models for the text branch and CLIP ViT-B/32 for vision.</p>
+  <pre><code>import os
+print(os.listdir('frozen-main'))</code></pre>
 
   <h2>📊 Results</h2>
   <p>
-    We evaluate on the CC3M dataset using three random seeds. Even with just a frozen encoder and a tiny fusion head, results are surprisingly strong:
+    Evaluated on CC3M dataset under few-shot settings:
   </p>
 
   <table>
@@ -146,34 +168,27 @@ python bin/train --config-name=train dataset=CC3M optimizer=Finetune</code></pre
 
   <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
 
-  <h2>🤠 Reflections</h2>
-  <p><strong>What surprised us:</strong></p>
+  <h2>🧠 Reflections</h2>
+  <p><strong>(a) What surprised you?</strong></p>
   <ul>
-    <li>High performance with <strong>frozen encoders</strong>—we expected more degradation.</li>
-    <li>Fusion heads generalized well across datasets with minimal tuning.</li>
-    <li>Inference time dropped significantly due to smaller trainable modules.</li>
-  </ul>
-  <p><strong>Scope for improvement:</strong></p>
-  <ul>
-    <li>Explore other fusion designs like FiLM or LoRA-infused adapters.</li>
-    <li>Incorporate larger LLMs to improve text comprehension in noisy tasks.</li>
-    <li>Benchmark on real-world settings like VQA, Captioning, and Retrieval.</li>
+    <li>Frozen encoders still performed extremely well—closer than expected to full fine-tuning.</li>
+    <li>Training only the fusion module drastically reduced training time.</li>
   </ul>
 
-  <h2>📍 Next Steps</h2>
+  <p><strong>(b) What can be improved?</strong></p>
   <ul>
-    <li>↻ Try on COCO, VQA, and ImageNet.</li>
-    <li>🔍 Compare fusion strategies: concatenation vs. cross-attention.</li>
-    <li>🚀 Benchmark latency and memory for real-world applications.</li>
+    <li>More advanced fusion techniques may further improve accuracy.</li>
+    <li>Try with newer datasets or LLM-based vision-language encoders.</li>
+    <li>Better visualizations to understand cross-modal alignment.</li>
   </ul>
 
   <h2>📚 References</h2>
   <ul>
-    <li><a href="https://arxiv.org/abs/2106.13884" target="_blank">Tsimpoukelli et al., “Multimodal Few-Shot Learning with Frozen LMs”, 2021</a></li>
-    <li><a href="https://arxiv.org/abs/2205.01068" target="_blank">Zhang et al., “OPT: Open Pretrained Transformers”, 2022</a></li>
-    <li><a href="https://arxiv.org/abs/2103.00020" target="_blank">Radford et al., “CLIP”, 2021</a></li>
-    <li><a href="https://arxiv.org/abs/2107.07651" target="_blank">Wang et al., “ALBEF”, ICCV 2021</a></li>
-    <li><a href="https://arxiv.org/abs/2302.10866" target="_blank">DeepMind Flamingo, 2022</a></li>
+    <li>Radford et al., “CLIP” (2021) – <a href="https://openai.com/research/clip">link</a></li>
+    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
+    <li>Tsimpoukelli et al., “Frozen: Learning with Frozen LMs” (2022)</li>
+    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+    <li>Huang et al., “Flamingo” (DeepMind, 2022)</li>
   </ul>
 
 </body>
