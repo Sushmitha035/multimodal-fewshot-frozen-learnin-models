@@ -131,25 +131,6 @@
       </ul>
     </div>
 
-    <div class="card">
-      <h3>Technologies and Tools Used ⚙️</h3>
-      <ul>
-        <li>PyTorch for building and experimenting with machine learning models. 💻</li>
-        <li>HuggingFace Transformers for leveraging pre-trained language models like CLIP. 🧑‍💻</li>
-        <li>WandB (Weights and Biases) for experiment tracking and hyperparameter optimization. 📈</li>
-        <li>CLIP for vision-language pretraining, which allows models to align textual and visual data. 🖼️📖</li>
-        <li>Flamingo-style fusion and adapter layers for modular learning without full fine-tuning. 🔄</li>
-      </ul>
-    </div>
-
-    <h2 class="section-title">Motivation: Why This Topic? 💭</h2>
-    <p>
-      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results. 🤔
-    </p>
-    <p>
-      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
-    </p>
-
     <h2 class="section-title">What is Few-Shot Learning? 🤖</h2>
     <p>
       Few-shot learning refers to training a model to generalize well from only a few examples, sometimes just one or two labeled examples. This is especially crucial in domains where large amounts of labeled data are hard to come by. For instance, it can be used to identify a new object in an image with only a couple of labeled samples. 🧐
@@ -165,6 +146,37 @@
     <p>
       The fusion of these models with few-shot learning capabilities allows us to solve complex vision-language tasks efficiently. The frozen language models capture rich representations from both images and text, making them adaptable across different modalities with minimal labeled data. 🌍
     </p>
+<h2 class="section-title">Motivation: Why This Topic? 💭</h2>
+    <p>
+      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results. 🤔
+    </p>
+    <p>
+      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
+    </p>
+
+    <h2 class="section-title">Connection to Past and Current Work 
+      🔗</h2>
+    <p>
+      This work builds on the success of CLIP, which has already proven its ability to handle zero-shot vision-language tasks. In comparison to models that require extensive fine-tuning, such as Flamingo or ALBEF, our work leverages prompt tuning and adapter-based methods to reduce computational requirements while retaining high performance. ⚙️
+    </p>
+    <p>
+       Our approach is aligned with the growing trend in machine learning to reduce the compute required for fine-tuning models, which has significant implications for scalability and efficiency in deploying AI systems. 🌍
+    </p>
+
+    <h2 class="section-title">Key Learnings and Insights 📝</h2>
+    <ul>
+      <li>Frozen models are still highly effective for multimodal tasks, and they offer a more efficient alternative to fully fine-tuned models. 🌱
+      </li>
+      <li>Simple fusion methods can be highly effective for cross-modal learning, which challenges the need for complex architectures in certain tasks. 🔍</li>
+      <li>Few-shot learning can be applied with minimal updates to the model, making it highly efficient for tasks with limited labeled data. 📦</li>
+      <li>The modular design of the codebase allows for flexible experimentation, which is key to advancing multimodal learning in a more accessible manner. 🔄</li>
+    </ul>
+    <h2 class="section-title">Code and Experimentation 💻</h2>
+    <p>Install the codebase and start experimenting with the models:</p>
+    <pre><code>!unzip frozen-main.zip
+!pip install -q -e frozen-main</code></pre>
+    <pre><code>import os
+print(os.listdir('frozen-main'))</code></pre>
 
     <h2 class="section-title">Results and Performance 📊</h2>
     <p>
@@ -173,9 +185,26 @@
 
     <div class="content-between">
       <img src="few_shot_performance.png" alt="Few-Shot Learning Performance Chart" />
-      <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
+      <p>
+        This chart shows the performance of the frozen model in different few-shot settings. As seen, the model performs fairly well even with minimal data, confirming the potential of few-shot learning. 📊
+      </p>
     </div>
 
+    <div class="content-between">
+      <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
+      <p>
+        The accuracy chart above demonstrates the strong results achieved by the frozen model across various few-shot settings. It validates the hypothesis that even without full fine-tuning, frozen models can perform remarkably well. 🌟
+      </p>
+    </div>
+<h2 class="section-title">Reflections and Future Work 🔮</h2>
+    <p><strong>What surprised you? 😲</strong></p>
+    <ul>
+      <li>The performance of frozen encoders was much better than expected, with results very close to those of full fine-tuning. 🔥</li>
+      <li>Using a fusion m
+        <p><strong>What can be improved? ⚙️</strong></p>
+    <ul>
+      <li>Implementing more sophisticated fusion techniques could further improve performance and flexibility. 🚀
+      </li>
     <h2 class="section-title">Conclusion and Benefits 🏆</h2>
     <p>
       Frozen demonstrates the power of combining visual and textual data using deep learning. The framework is modular, scalable, and adaptable to various multimodal tasks. With further training and optimization, it can serve real-world applications in accessibility, search, and content understanding. 💡
@@ -184,10 +213,13 @@
       <strong>Benefits:</strong> Efficient transfer learning from large pre-trained models and better performance with less labeled data. 🌱
     </p>
     <p>
-      <strong>Challenges:</strong> Addressing the need for effective multimodal training and generalizing across modalities with frozen models.
+      <strong>Challenges:</strong> Addressing the need for effective multimodal training and generalizing across modalities with frozen models. 🚀
+    </p>
 
-
-
- 
-
+    <footer>
+      <p>Thank you for reading! 💡</p>
+    </footer>
+  </div>
+</body>
+</html>
 
