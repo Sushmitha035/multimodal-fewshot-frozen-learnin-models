@@ -120,11 +120,22 @@
       </ul>
     </div>
 
-    <h2 class="section-title">Few-Shot Learning Explained 🔍</h2>
+    <h2 class="section-title">What is Few-Shot Learning🔍</h2>
     <p>
       Few-shot learning refers to the ability to generalize from just a handful of examples. This is crucial in domains like medical imaging or low-resource languages.
     </p>
-
+<h2 class="section-title"Combining Few-Shot Learning and Frozen Language Models 🔍</h2>
+    <p>
+       In this project, we combine the power of few-shot learning with frozen pre-trained language models. By using models like CLIP that are already pre-trained on vast amounts of data, we leverage their ability to handle both visual and textual data without the need for expensive retraining.
+    </p>
+  </p>
+<h2 class="section-title">Motivation: Why This Topic? 💭</h2>
+    <p>
+      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results. 🤔
+    </p>
+    <p>
+      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
+    </p>
     <h2 class="section-title">Fusion Strategies 🔗</h2>
     <p>
       Fusion techniques refer to combining visual and textual features. This can be early, late, or hybrid. We opted for a lightweight late fusion approach to minimize resource use.
@@ -137,7 +148,17 @@
     <p>
       While Flamingo uses a causal decoder and visual tokens, our approach sticks to frozen models and explores simpler fusion, saving compute. Compared to ALBEF, we avoid heavy vision-language pre-training.
     </p>
+</p>
 
+    <h2 class="section-title">Key Learnings and Insights 📝</h2>
+    <ul>
+      <li>Frozen models are still highly effective for multimodal tasks, and they offer a more efficient alternative to fully fine-tuned models. 🌱
+      </li>
+      <li>Simple fusion methods can be highly effective for cross-modal learning, which challenges the need for complex architectures in certain tasks. 🔍</li>
+      <li>Few-shot learning can be applied with minimal updates to the model, making it highly efficient for tasks with limited labeled data. 📦
+      </li>
+      <li>The modular design of the codebase allows for flexible experimentation, which is key to advancing multimodal learning in a more accessible manner. 🔄</li>
+    </ul>
     <h2 class="section-title">Code Setup & Installation 💻</h2>
     <pre><code>!unzip frozen-main.zip
 !pip install -q -e frozen-main</code></pre>
@@ -156,7 +177,24 @@ for shot in [1, 5, 10]:
 
     <h2 class="section-title">Few-Shot Results on CC3M 📊</h2>
     <p>Below are few-shot results measured on the CC3M dataset:</p>
+<p>
+    Evaluated on CC3M dataset under few-shot settings:
+  </p>
 
+  <table>
+    <thead>
+      <tr>
+        <th>Shots</th>
+        <th>Frozen Head</th>
+        <th>Full Finetune</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
+      <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
+      <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+    </tbody>
+  </table>
     <div class="content-between">
       <img src="few_shot_performance.png" alt="Performance Chart">
       <img src="few_shot_accuracy_chart.png" alt="Accuracy Chart">
@@ -219,10 +257,17 @@ Text Encoder (CLIP)
       <li>Apply to multilingual settings for global accessibility</li>
     </ul>
 
-    <footer>
-      <p>© 2027 Raparla Sushmitha | All rights reserved 💡</p>
-    </footer>
-  </div>
+   <h2>📚 References</h2>
+<ul>
+    <li>For more details on CLIP, refer to the paper by Radford et al. (2021) available on arXiv: 
+        <a href="https://arxiv.org/abs/2106.13884" target="_blank">CLIP Paper - Radford et al. (2021)</a>
+    </li>
+    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
+    <li>Tsimpoukelli et al., “Frozen: Learning with Frozen LMs” (2022)</li>
+    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+    <li>Huang et al., “Flamingo” (DeepMind, 2022)</li>
+</ul>
+
 </body>
 </html>
 
