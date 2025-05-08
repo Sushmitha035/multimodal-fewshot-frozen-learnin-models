@@ -1,93 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimodal Few-Shot Learning</title>
-    <style> 
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; background-color: #f9f9f9; }
-        h1, h2 { color: #333; }
-        pre { background: #eee; padding: 10px; overflow-x: auto; }
-        table { border-collapse: collapse; width: 80%; margin: 20px 0; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #f0f0f0; }
-        .chart-img { max-width: 100%; height: auto; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multimodal Few-Shot Learning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fdfdfd;
+      color: #222;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+    }
+    h1 small {
+      font-weight: normal;
+      display: block;
+      font-size: 0.6em;
+      color: #666;
+    }
+    h2 {
+      margin-top: 2.5em;
+      color: #333;
+    }
+    p, ul {
+      font-size: 1.1em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    img {
+      max-width: 100%;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    em {
+      color: #555;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Multimodal Few-Shot Learning<br><small>Frozen Encoders, Fresh Ideas</small></h1>
-<p><em>July 2025 · Raparla Sushmitha</em></p>
+  <h1>Multimodal Few-Shot Learning<br><small>Frozen Encoders, Fresh Ideas</small></h1>
+  <p><em>July 2025 · Raparla Sushmitha</em></p>
 
-<h2>🎯 Motivation</h2>
-<p>Pre-trained vision and language encoders like CLIP are incredibly powerful—but fine-tuning them can be expensive. We ask: <strong>can we achieve strong few-shot performance by freezing these models and training only a lightweight fusion head?</strong></p>
-<p>Spoiler: yes, we can.</p>
+  <h2>🎯 Motivation</h2>
+  <p>
+    Pre-trained vision and language encoders like CLIP are incredibly powerful—but fine-tuning them can be expensive.
+    We ask: <strong>can we achieve strong few-shot performance by freezing these models and training only a lightweight fusion head?</strong>
+  </p>
+  <p>Spoiler: yes, we can.</p>
 
-<h2>🔍 Rethinking Multimodal Learning</h2>
-<p>CLIP’s zero-shot ability was a turning point for multimodal models. Later methods like ALBEF and Flamingo introduced fusion mechanisms but still required fine-tuning large backbones. Inspired by prompt-tuning and adapter methods, we explore a minimalist approach: <strong>frozen vision and text encoders, train only a cross-modal fusion head</strong>.</p>
-<p>This setup drastically reduces computational cost—while still delivering competitive results.</p>
+  <h2>🔍 Rethinking Multimodal Learning</h2>
+  <p>
+    CLIP’s zero-shot ability was a turning point for multimodal models. Later methods like ALBEF and Flamingo introduced fusion mechanisms but still required fine-tuning large backbones. 
+    Inspired by prompt-tuning and adapter methods, we explore a minimalist approach: <strong>frozen vision and text encoders, train only a cross-modal fusion head</strong>.
+  </p>
+  <p>This setup drastically reduces computational cost—while still delivering competitive results.</p>
 
-<h2>🧪 Methodology</h2>
-<p>We propose a simple pipeline:</p>
-<ul>
+  <h2>🧪 Methodology</h2>
+  <ul>
     <li>Freeze both vision and text backbones (CLIP-style encoders).</li>
     <li>Train a lightweight fusion module (e.g., a few cross-attention layers).</li>
     <li>Evaluate on standard few-shot tasks (1, 5, and 10-shot settings).</li>
     <li>Use Hydra configs for modular, reproducible experimentation.</li>
-</ul>
+  </ul>
 
-<pre><code># Install the code
+  <pre><code># Install the code
 !unzip frozen-main.zip
 !pip install -q -e frozen-main</code></pre>
 
-<pre><code># Directory layout
+  <pre><code># Directory layout
 import os
 print(os.listdir('frozen-main'))
 # ['.gitignore', 'LICENSE', 'README.md', 'bin',
 #  'config', 'environment.yml', 'frozen',
 #  'notebooks', 'setup.py']</code></pre>
 
-<h2>📊 Results</h2>
-<p>We evaluate on the CC3M dataset using three random seeds. Even with just a frozen encoder and a tiny fusion head, results are surprisingly strong:</p>
+  <h2>📊 Results</h2>
+  <p>
+    We evaluate on the CC3M dataset using three random seeds. Even with just a frozen encoder and a tiny fusion head, results are surprisingly strong:
+  </p>
 
-<table>
-<thead>
-<tr><th>Shots</th><th>Frozen Head</th><th>Full Finetune</th></tr>
-</thead>
-<tbody>
-<tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
-<tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
-<tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
-</tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Shots</th>
+        <th>Frozen Head</th>
+        <th>Full Finetune</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
+      <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
+      <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+    </tbody>
+  </table>
 
-<!-- Add the image here -->
-<img src="images/few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" width="600"/>
+  <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
 
-<h2>🤠 Reflections</h2>
-<p>We were surprised to see such <strong>high performance with frozen encoders</strong>. It suggests:</p>
-<ul>
+  <h2>🤠 Reflections</h2>
+  <p>We were surprised to see such <strong>high performance with frozen encoders</strong>. It suggests:</p>
+  <ul>
     <li>Vision and language backbones already encode transferable concepts.</li>
     <li>Cross-modal fusion can be learned efficiently with minimal updates.</li>
     <li>Frozen models offer practical advantages—speed, stability, and reduced hardware needs.</li>
-</ul>
+  </ul>
 
-<h2>📍 Next Steps</h2>
-<ul>
+  <h2>📍 Next Steps</h2>
+  <ul>
     <li>↻ Try on COCO, VQA, and ImageNet.</li>
     <li>🔍 Compare fusion strategies: concatenation vs. cross-attention.</li>
     <li>🚀 Benchmark latency and memory for real-world applications.</li>
-</ul>
+  </ul>
 
-<h2>📚 References</h2>
-<ul>
+  <h2>📚 References</h2>
+  <ul>
     <li>Radford et al., “CLIP” (2021)</li>
     <li>Wang et al., “ALBEF” (ICCV ’21)</li>
     <li>Tsimpoukelli et al., “Frozen LLMs for Few-Shot Learning” (2022)</li>
     <li>Xie et al., “AdvProp” (CVPR ’20)</li>
-</ul>
+  </ul>
 
 </body>
 </html>
+
 
 
