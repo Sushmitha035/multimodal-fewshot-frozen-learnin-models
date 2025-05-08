@@ -8,175 +8,195 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: #fdfdfd;
-      color: #222;
-      line-height: 1.7;
-      max-width: 900px;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 50px 0;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.2em;
+      font-size: 3em;
+      color: #333;
+      margin-bottom: 10px;
     }
     h1 small {
-      font-weight: normal;
-      display: block;
-      font-size: 0.6em;
-      color: #666;
+      font-size: 0.8em;
+      color: #777;
+      font-weight: 400;
     }
     h2 {
-      margin-top: 2.5em;
-      color: #333;
+      font-size: 2.5em;
+      margin-top: 40px;
+      color: #444;
     }
-    p, ul {
+    p {
       font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    ul {
+      font-size: 1.1em;
+      margin: 20px 0;
+    }
+    ul li {
+      margin-bottom: 10px;
     }
     pre {
-      background: #f4f4f4;
-      padding: 12px;
-      border-radius: 6px;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
       overflow-x: auto;
     }
     code {
       font-family: Consolas, monospace;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background: #f0f0f0;
+      background-color: #f4f4f4;
+      padding: 5px 10px;
+      border-radius: 5px;
     }
     img {
-      max-width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    em {
-      color: #555;
-    }
-    li {
-      margin-bottom: 8px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
     }
     .card {
-      border: 1px solid #ccc;
+      background-color: #fff;
+      padding: 20px;
       border-radius: 8px;
-      padding: 16px;
-      margin: 16px 0;
-      background: #fff;
+      margin: 20px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
     .card h3 {
       margin-top: 0;
+      color: #333;
     }
     .section-title {
-      margin-top: 3em;
+      font-size: 1.8em;
       border-bottom: 2px solid #eee;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
+      margin-top: 40px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #f9f9f9;
+      margin-top: 40px;
+      color: #777;
     }
   </style>
 </head>
 <body>
 
-  <!-- PART 1: Your Original Page Layout -->
+  <div class="container">
+    <header>
+      <h1>Multimodal Few-Shot Learning <small>Leveraging Frozen Encoders for Efficient Vision-Language Tasks</small></h1>
+      <p><em>By Raparla Sushmitha</em></p>
+    </header>
 
-  <h1>Multimodal Few-Shot Learning <small>Frozen Encoders, Fresh Ideas</small></h1>
-  <p><em>By Raparla Sushmitha</em></p>
+    <h2 class="section-title">About the Project</h2>
+    <p>
+      This project delves into the exciting world of multimodal few-shot learning, where we aim to use pre-trained models to solve vision-language tasks with minimal data. Traditional machine learning models require large amounts of labeled data, but few-shot learning seeks to break this barrier, enabling effective performance with just a few examples. Our work focuses on adapting frozen models (such as CLIP) for these tasks, ensuring that they can still perform at a high level even without being fine-tuned on every new dataset.
+    </p>
+    <p>
+      Specifically, we explore the use of frozen pre-trained vision and language encoders, like CLIP, in combination with lightweight fusion strategies. These strategies enable the model to perform multimodal tasks efficiently, reducing both the computational cost and the need for large-scale retraining. The goal is to create an efficient and scalable solution for vision-language alignment in few-shot settings.
+    </p>
 
-  <h2 class="section-title">About the Project</h2>
-  <p>
-    This project explores how frozen pre-trained vision and language encoders can be adapted for few-shot multimodal learning tasks. We investigate lightweight fusion modules, performance across different shots, and compare frozen vs. full fine-tuning methods.
-  </p>
+    <div class="card">
+      <h3>Key Highlights</h3>
+      <ul>
+        <li>Using CLIP and other frozen language models for vision-language alignment tasks.</li>
+        <li>Few-shot learning experiments conducted on the large-scale CC3M dataset.</li>
+        <li>Evaluation of the impact of frozen vs. fully fine-tuned models in various few-shot settings.</li>
+        <li>Exploring the efficiency of modular and lightweight fusion strategies for multimodal learning.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h3>Highlights</h3>
+    <div class="card">
+      <h3>Technologies and Tools Used</h3>
+      <ul>
+        <li>PyTorch for building and experimenting with machine learning models.</li>
+        <li>HuggingFace Transformers for leveraging pre-trained language models like CLIP.</li>
+        <li>WandB (Weights and Biases) for experiment tracking and hyperparameter optimization.</li>
+        <li>CLIP for vision-language pretraining, which allows models to align textual and visual data.</li>
+        <li>Flamingo-style fusion and adapter layers for modular learning without full fine-tuning.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">Motivation: Why This Topic?</h2>
+    <p>
+      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results.
+    </p>
+    <p>
+      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited.
+    </p>
+
+    <h2 class="section-title">Connection to Past and Current Work</h2>
+    <p>
+      This work builds on the success of CLIP, which has already proven its ability to handle zero-shot vision-language tasks. In comparison to models that require extensive fine-tuning, such as Flamingo or ALBEF, our work leverages prompt tuning and adapter-based methods to reduce computational requirements while retaining high performance.
+    </p>
+    <p>
+      Our approach is aligned with the growing trend in machine learning to reduce the compute required for fine-tuning models, which has significant implications for scalability and efficiency in deploying AI systems.
+    </p>
+
+    <h2 class="section-title">Key Learnings and Insights</h2>
     <ul>
-      <li>Uses CLIP & Frozen LMs for vision-language alignment</li>
-      <li>Few-shot learning on CC3M dataset</li>
-      <li>Modular codebase for rapid experimentation</li>
+      <li>Frozen models are still highly effective for multimodal tasks, and they offer a more efficient alternative to fully fine-tuned models.</li>
+      <li>Simple fusion methods can be highly effective for cross-modal learning, which challenges the need for complex architectures in certain tasks.</li>
+      <li>Few-shot learning can be applied with minimal updates to the model, making it highly efficient for tasks with limited labeled data.</li>
+      <li>The modular design of the codebase allows for flexible experimentation, which is key to advancing multimodal learning in a more accessible manner.</li>
     </ul>
-  </div>
 
-  <div class="card">
-    <h3>Technologies Used</h3>
-    <ul>
-      <li>PyTorch, HuggingFace Transformers</li>
-      <li>CLIP, Flamingo-style Fusion, Adapter layers</li>
-      <li>WandB for experiment tracking</li>
-    </ul>
-  </div>
-
-  <!-- PART 2: Blog-Style Post (from GitHub Screenshot) -->
-
-  <h2 class="section-title">📌 Title & Your Name</h2>
-  <p><strong>Multimodal Few-Shot Learning: Frozen Encoders, Fresh Ideas</strong><br>Raparla Sushmitha</p>
-
-  <h2>🎯 Motivation – Why did you pick this topic?</h2>
-  <p>
-    Pre-trained vision and language encoders like CLIP are incredibly powerful—but fine-tuning them can be expensive.
-    I was fascinated by the idea of leveraging these models as-is and still achieving good performance. The challenge of improving few-shot learning without costly training drove me to this topic.
-  </p>
-
-  <h2>🔁 How does it connect with past and current work?</h2>
-  <p>
-    This work draws from CLIP’s success in zero-shot vision-language tasks and expands it with ideas from Flamingo and ALBEF.
-    Where those models require full fine-tuning, we take inspiration from prompt tuning and adapters to push for efficient learning using frozen backbones.
-    This fits into the broader trend in multimodal learning that seeks to reduce compute while improving generalization.
-  </p>
-
-  <h2>📘 Explain your learning from this work</h2>
-  <ul>
-    <li>Frozen models retain rich representations that are highly reusable.</li>
-    <li>Cross-modal fusion can be simple but still effective.</li>
-    <li>Few-shot learning doesn't need large updates—just smart ones.</li>
-    <li>Modular experiment configs make testing faster and reproducible.</li>
-  </ul>
-
-  <h2>💻 Code / Notebook</h2>
-  <p>Install the codebase and experiment:</p>
-  <pre><code>!unzip frozen-main.zip
+    <h2 class="section-title">Code and Experimentation</h2>
+    <p>Install the codebase and start experimenting with the models:</p>
+    <pre><code>!unzip frozen-main.zip
 !pip install -q -e frozen-main</code></pre>
-  <pre><code>import os
+    <pre><code>import os
 print(os.listdir('frozen-main'))</code></pre>
 
-  <h2>📊 Results</h2>
-  <p>
-    Evaluated on CC3M dataset under few-shot settings:
-  </p>
+    <h2 class="section-title">Results and Performance</h2>
+    <p>
+      The results show that frozen models can perform nearly as well as fully fine-tuned models in few-shot settings, especially when evaluated on the CC3M dataset. The performance across different shot settings (1-shot, 5-shot, and 10-shot) reveals that frozen models can achieve impressive results with minimal data.
+    </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Shots</th>
-        <th>Frozen Head</th>
-        <th>Full Finetune</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
-      <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
-      <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
-    </tbody>
-  </table>
-  <img src="few_shot_performance.png" alt="Few-Shot Learning Performance Chart" />
-  <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
+    <table>
+      <thead>
+        <tr>
+          <th>Shots</th>
+          <th>Frozen Head</th>
+          <th>Full Finetune</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
+        <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
+        <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+      </tbody>
+    </table>
 
-  <h2>🧠 Reflections</h2>
-  <p><strong>(a) What surprised you?</strong></p>
-  <ul>
-    <li>Frozen encoders still performed extremely well—closer than expected to full fine-tuning.</li>
-    <li>Training only the fusion module drastically reduced training time.</li>
-  </ul>
+    <img src="few_shot_performance.png" alt="Few-Shot Learning Performance Chart" />
+    <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
 
-  <p><strong>(b) What can be improved?</strong></p>
-  <ul>
+    <h2 class="section-title">Reflections and Future Work</h2>
+    <p><strong>What surprised you?</strong></p>
+    <ul>
+      <li>The performance of frozen encoders was much better than expected, with results very close to those of full fine-tuning.</li>
+      <li>Using a fusion module instead of fine-tuning the entire model drastically reduced the training time.</li>
+    </ul>
+
+    <p><strong>What can be improved?</strong></p>
+     <ul>
     <li>More advanced fusion techniques may further improve accuracy.</li>
     <li>Try with newer datasets or LLM-based vision-language encoders.</li>
     <li>Better visualizations to understand cross-modal alignment.</li>
@@ -194,7 +214,9 @@ print(os.listdir('frozen-main'))</code></pre>
 </ul>
 
 </body>
-</html>
+</html> 
+    <ul>
+      <li>Implementing more sophisticated fusion techniques could
 
 
  
