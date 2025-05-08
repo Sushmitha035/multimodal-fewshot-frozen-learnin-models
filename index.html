@@ -87,24 +87,42 @@
   </p>
   <p>This setup drastically reduces computational cost—while still delivering competitive results.</p>
 
-  <h2>🧪 Methodology</h2>
+  <h2>📚 Historical Context</h2>
+  <p>
+    Multimodal learning has evolved from late fusion pipelines to deeply integrated models. CLIP by OpenAI (2021) unified vision and text via contrastive pretraining, enabling zero-shot capabilities. 
+    ALBEF (ICCV 2021) pushed this further by using momentum distillation. More recently, methods like Flamingo (DeepMind, 2022) blend frozen LLMs with learned visual adapters. Our method extends this trajectory:
+    <strong>minimal updates, maximum reuse.</strong>
+  </p>
+
+  <h2>🧠 What We Learned</h2>
   <ul>
-    <li>Freeze both vision and text backbones (CLIP-style encoders).</li>
-    <li>Train a lightweight fusion module (e.g., a few cross-attention layers).</li>
-    <li>Evaluate on standard few-shot tasks (1, 5, and 10-shot settings).</li>
-    <li>Use Hydra configs for modular, reproducible experimentation.</li>
+    <li><strong>Frozen backbones</strong> are extremely effective in few-shot settings.</li>
+    <li><strong>Cross-modal fusion</strong> doesn’t need to be deep—2–3 layers are often enough.</li>
+    <li><strong>Reproducibility</strong> improves when fewer parameters are updated.</li>
+    <li>CLIP’s representations are rich enough to generalize with minimal tuning.</li>
   </ul>
 
+  <h2>💻 Code & Setup</h2>
   <pre><code># Install the code
 !unzip frozen-main.zip
 !pip install -q -e frozen-main</code></pre>
 
-  <pre><code># Directory layout
+  <pre><code># Project layout
 import os
 print(os.listdir('frozen-main'))
 # ['.gitignore', 'LICENSE', 'README.md', 'bin',
 #  'config', 'environment.yml', 'frozen',
 #  'notebooks', 'setup.py']</code></pre>
+
+  <p>
+    The training is modular thanks to <strong>Hydra</strong> configuration files. 
+    Here's how we train using CC3M data with frozen encoders and a 3-layer fusion head.
+  </p>
+
+  <pre><code># Example config call
+python bin/train --config-name=train dataset=CC3M optimizer=Finetune</code></pre>
+
+  <p>Each run logs accuracy per shot setting and tracks validation loss. We use OPT-style language models for the text branch and CLIP ViT-B/32 for vision.</p>
 
   <h2>📊 Results</h2>
   <p>
@@ -129,11 +147,17 @@ print(os.listdir('frozen-main'))
   <img src="few_shot_accuracy_chart.png" alt="Few-Shot Accuracy Chart" />
 
   <h2>🤠 Reflections</h2>
-  <p>We were surprised to see such <strong>high performance with frozen encoders</strong>. It suggests:</p>
+  <p><strong>What surprised us:</strong></p>
   <ul>
-    <li>Vision and language backbones already encode transferable concepts.</li>
-    <li>Cross-modal fusion can be learned efficiently with minimal updates.</li>
-    <li>Frozen models offer practical advantages—speed, stability, and reduced hardware needs.</li>
+    <li>High performance with <strong>frozen encoders</strong>—we expected more degradation.</li>
+    <li>Fusion heads generalized well across datasets with minimal tuning.</li>
+    <li>Inference time dropped significantly due to smaller trainable modules.</li>
+  </ul>
+  <p><strong>Scope for improvement:</strong></p>
+  <ul>
+    <li>Explore other fusion designs like FiLM or LoRA-infused adapters.</li>
+    <li>Incorporate larger LLMs to improve text comprehension in noisy tasks.</li>
+    <li>Benchmark on real-world settings like VQA, Captioning, and Retrieval.</li>
   </ul>
 
   <h2>📍 Next Steps</h2>
@@ -145,14 +169,17 @@ print(os.listdir('frozen-main'))
 
   <h2>📚 References</h2>
   <ul>
-    <li>Radford et al., “CLIP” (2021)</li>
-    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
-    <li>Tsimpoukelli et al., “Frozen LLMs for Few-Shot Learning” (2022)</li>
-    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+    <li><a href="https://arxiv.org/abs/2106.13884" target="_blank">Tsimpoukelli et al., “Multimodal Few-Shot Learning with Frozen LMs”, 2021</a></li>
+    <li><a href="https://arxiv.org/abs/2205.01068" target="_blank">Zhang et al., “OPT: Open Pretrained Transformers”, 2022</a></li>
+    <li><a href="https://arxiv.org/abs/2103.00020" target="_blank">Radford et al., “CLIP”, 2021</a></li>
+    <li><a href="https://arxiv.org/abs/2107.07651" target="_blank">Wang et al., “ALBEF”, ICCV 2021</a></li>
+    <li><a href="https://arxiv.org/abs/2302.10866" target="_blank">DeepMind Flamingo, 2022</a></li>
   </ul>
 
 </body>
 </html>
 
+
+ 
 
 
