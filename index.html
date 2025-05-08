@@ -1,149 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multimodal Few-Shot Learning</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      max-width: 920px;
-      margin: 80px auto;
-      padding: 0 20px;
-      color: #333;
-      line-height: 1.7;
-    }
-    h1 { font-size: 2.8em; margin-bottom: 0.3em; color: #222; }
-    h1 em { font-size: 0.5em; color: #555; display: block; margin-top: 0.2em; }
-    h2 {
-      font-size: 1.9em;
-      margin-top: 2.2em;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.3em;
-      color: #111;
-    }
-    p, ul, ol { font-size: 1.15em; margin-top: 1em; }
-    ul li, ol li { margin-bottom: 0.6em; }
-    pre {
-      background: #f4f4f8;
-      padding: 16px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 0.95em;
-      margin-top: 1em;
-    }
-    code {
-      font-family: Consolas, monospace;
-      background: #eef;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.2em 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px 14px;
-      text-align: center;
-    }
-    th { background: #f0f0f8; font-weight: bold; }
-    tr:nth-child(even) { background: #fafaff; }
-    .figure {
-      text-align: center;
-      margin: 2.5em 0;
-    }
-    .figure img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .figure figcaption {
-      font-size: 1em;
-      color: #555;
-      margin-top: 0.4em;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Few-Shot Learning</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; background-color: #f9f9f9; }
+        h1, h2 { color: #333; }
+        pre { background: #eee; padding: 10px; overflow-x: auto; }
+        table { border-collapse: collapse; width: 80%; margin: 20px 0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f0f0f0; }
+        .chart-img { max-width: 100%; height: auto; }
+    </style>
 </head>
 <body>
 
-<h1>Multimodal Few-Shot Learning<br><em>Frozen Encoders, Fresh Ideas</em></h1>
+<h1>Multimodal Few-Shot Learning<br><small>Frozen Encoders, Fresh Ideas</small></h1>
+<p><em>July 2025 · Raparla Sushmitha</em></p>
 
 <h2>🎯 Motivation</h2>
-<p>
-Pre-trained vision & language encoders are powerful but costly to fine-tune.
-This project explores freezing both backbones and training only a lightweight fusion head in a few-shot setting to maintain high performance at minimal computational cost.
-</p>
+<p>Pre-trained vision and language encoders like CLIP are incredibly powerful—but fine-tuning them can be expensive. We ask: <strong>can we achieve strong few-shot performance by freezing these models and training only a lightweight fusion head?</strong></p>
+<p>Spoiler: yes, we can.</p>
 
-<h2>🔍 Connection to Multimodal Learning</h2>
-<p>
-CLIP pioneered frozen encoder use via contrastive learning.
-ALBEF & Flamingo added fusion but still fine-tuned large models.
-Prompt-tuning and adapters showed it's possible to learn with minimal updates.
-Frozen-main unites these ideas: freeze vision/text encoders, train a small cross-modal fusion head.
-</p>
+<h2>🔍 Rethinking Multimodal Learning</h2>
+<p>CLIP’s zero-shot ability was a turning point for multimodal models. Later methods like ALBEF and Flamingo introduced fusion mechanisms but still required fine-tuning large backbones. Inspired by prompt-tuning and adapter methods, we explore a minimalist approach: <strong>frozen vision and text encoders, train only a cross-modal fusion head</strong>.</p>
+<p>This setup drastically reduces computational cost—while still delivering competitive results.</p>
 
-<h2>💡 Key Insights</h2>
+<h2>🧪 Methodology</h2>
+<p>We propose a simple pipeline:</p>
 <ul>
-  <li>Hydra config simplifies dataset switching (e.g., CC3M ↔ COCO).</li>
-  <li>The “Frozen” optimizer restricts updates to the fusion head.</li>
-  <li>Modular repo layout (<code>bin/</code>, <code>config/</code>, <code>notebooks/</code>) is intuitive.</li>
-  <li>Experiments are easy to configure using YAML + CLI.</li>
+    <li>Freeze both vision and text backbones (CLIP-style encoders).</li>
+    <li>Train a lightweight fusion module (e.g., a few cross-attention layers).</li>
+    <li>Evaluate on standard few-shot tasks (1, 5, and 10-shot settings).</li>
+    <li>Use Hydra configs for modular, reproducible experimentation.</li>
 </ul>
 
-<h2>🛠️ Running the Code</h2>
-<pre><code># Unzip & install
-import zipfile
-zipfile.ZipFile('frozen-main.zip').extractall()
-!pip install -q -e frozen-main
+<pre><code># Install the code
+!unzip frozen-main.zip
+!pip install -q -e frozen-main</code></pre>
 
-# Directory structure
+<pre><code># Directory layout
 import os
 print(os.listdir('frozen-main'))
-</code></pre>
-<pre><code>['.gitignore', 'LICENSE', 'README.md', 'bin',
- 'config', 'environment.yml', 'frozen',
- 'notebooks', 'setup.py']
-</code></pre>
+# ['.gitignore', 'LICENSE', 'README.md', 'bin',
+#  'config', 'environment.yml', 'frozen',
+#  'notebooks', 'setup.py']</code></pre>
 
-<h2>📊 Final Results</h2>
-<p>Average accuracy across 3 seeds on CC3M:</p>
+<h2>📊 Results</h2>
+<p>We evaluate on the CC3M dataset using three random seeds. Even with just a frozen encoder and a tiny fusion head, results are surprisingly strong:</p>
+
 <table>
-  <thead><tr>
-    <th>Shots</th><th>Frozen Head</th><th>Full Finetune</th>
-  </tr></thead>
-  <tbody>
-    <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
-    <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
-    <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
-  </tbody>
+<thead>
+<tr><th>Shots</th><th>Frozen Head</th><th>Full Finetune</th></tr>
+</thead>
+<tbody>
+<tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
+<tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
+<tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+</tbody>
 </table>
 
-<div class="figure">
-  <img src="figs/fewshot_barplot.png" alt="Few-shot accuracy chart" />
-  <figcaption>Figure 1: Frozen head holds strong in few-shot learning.</figcaption>
-</div>
+<p><strong>Figure 1:</strong> Few-shot accuracy with frozen vs. finetuned models.<br>Frozen heads hold surprisingly strong.</p>
+<img src="chart.png" alt="Few-shot accuracy chart" class="chart-img">
 
-<h2>🧠 Reflections</h2>
+<h2>🤠 Reflections</h2>
+<p>We were surprised to see such <strong>high performance with frozen encoders</strong>. It suggests:</p>
 <ul>
-  <li><strong>Surprise:</strong> High performance with frozen encoders!</li>
-  <li><strong>Next Steps:</strong>
-    <ul>
-      <li>Try other datasets: COCO, VQA, ImageNet.</li>
-      <li>Compare fusion types: concat vs. cross-attention.</li>
-      <li>Benchmark latency and memory footprint.</li>
-    </ul>
-  </li>
+    <li>Vision and language backbones already encode transferable concepts.</li>
+    <li>Cross-modal fusion can be learned efficiently with minimal updates.</li>
+    <li>Frozen models offer practical advantages—speed, stability, and reduced hardware needs.</li>
+</ul>
+
+<h2>📍 Next Steps</h2>
+<ul>
+    <li>↻ Try on COCO, VQA, and ImageNet.</li>
+    <li>🔍 Compare fusion strategies: concatenation vs. cross-attention.</li>
+    <li>🚀 Benchmark latency and memory for real-world applications.</li>
 </ul>
 
 <h2>📚 References</h2>
 <ul>
-  <li>Radford et al., “CLIP” (2021)</li>
-  <li>Wang et al., “ALBEF” (ICCV ’21)</li>
-  <li>Tsimpoukelli et al., “Multimodal Few-Shot with Frozen LLMs” (arXiv ’22)</li>
-  <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+    <li>Radford et al., “CLIP” (2021)</li>
+    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
+    <li>Tsimpoukelli et al., “Frozen LLMs for Few-Shot Learning” (2022)</li>
+    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
 </ul>
 
 </body>
 </html>
+
