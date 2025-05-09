@@ -169,7 +169,8 @@
       <a href="#conclusion">Conclusion</a>
       <a href="#references">References</a>
       <hr />
-     <a href="https://huggingface.co/datasets/cc3m" target="_blank">📂 Dataset: CC3M</a>
+    <a href="https://huggingface.co/datasets/laion/cc3m" target="_blank">📂 CC3M Dataset</a>
+    <a href="https://huggingface.co/datasets/ms_coco" target="_blank">📂 COCO Dataset</a>
 
     </div>
 
@@ -264,10 +265,14 @@ for shot in [1, 5, 10]:
     acc = trainer.run_few_shot(shot=shot)
     print(f"Accuracy for {shot}-shot: {acc}%")</code></pre>
   
-  
-      <h2 class="section-title" id="results">Few-Shot Results on CC3M 📊</h2>
-      <p>Below are few-shot results measured on the CC3M dataset:</p>
 
+    <h2 class="section-title">Few-Shot Evaluation Datasets 📂</h2>
+<p>
+  We evaluated our few-shot learning setup on two widely-used vision-language datasets: <strong>CC3M</strong> and <strong>COCO</strong>. These provide a solid benchmark for comparing performance under limited data conditions.
+</p>
+
+<h2 class="section-title">Few-Shot Results on CC3M 📊</h2>
+<p>Below are few-shot results measured on the CC3M dataset:</p>
 
 
 <h2>Model Performance Comparison</h2>
