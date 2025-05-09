@@ -13,60 +13,110 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      display: flex;
     }
+
+    /* Container for sidebar and main content */
     .container {
+      display: flex;
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
+      margin: 0;
       padding: 20px;
     }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 25%;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h1 {
+      font-size: 2em;
+      color: #4A90E2;
+      margin-top: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #4A90E2;
+      text-decoration: none;
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar hr {
+      border: 1px solid #ddd;
+      margin: 20px 0;
+    }
+
+    /* Main content styling */
+    .main {
+      width: 75%;
+      padding: 20px;
+    }
+
     header {
       text-align: center;
       padding: 50px 0;
       background-color: #fff;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+
     h1 {
       font-size: 3em;
       color: #333;
       margin-bottom: 10px;
     }
+
     h1 small {
       font-size: 0.8em;
       color: #777;
       font-weight: 400;
     }
+
     h2 {
       font-size: 2.5em;
       margin-top: 40px;
       color: #444;
     }
+
     p, li {
       font-size: 1.1em;
       margin-bottom: 20px;
       color: #555;
     }
+
     ul {
       margin-left: 20px;
     }
+
     pre {
       background-color: #f4f4f4;
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
     }
+
     code {
       font-family: Consolas, monospace;
       background-color: #f4f4f4;
       padding: 5px 10px;
       border-radius: 5px;
     }
+
     img {
       width: 100%;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
     }
+
     .card {
       background-color: #fff;
       padding: 20px;
@@ -74,6 +124,7 @@
       margin: 20px 0;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
+
     footer {
       text-align: center;
       padding: 20px 0;
@@ -81,81 +132,77 @@
       margin-top: 40px;
       color: #777;
     }
+
     .section-title {
       font-size: 1.8em;
       border-bottom: 2px solid #eee;
       padding-bottom: 10px;
       margin-top: 40px;
     }
+
     .content-between {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
       gap: 20px;
     }
+
     .content-between img {
       max-width: 48%;
     }
   </style>
-<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-
-
-<div class="sidebar">
-  <h1 style="font-size: 2em; color: #4A90E2; margin-top: 0;">Sushmitha035</h1>
-  <p><a href="https://github.com/Sushmitha035" target="_blank" style="color: #4A90E2; text-decoration: none;">View My GitHub Profile</a></p>
-  <hr style="border: 1px solid #ddd; margin: 20px 0;" />
-  <a href="#overview">Overview</a>
-  <a href="#few-shot">Few-Shot Learning</a>
-  <a href="#motivation">Motivation</a>
-  <a href="#fusion">Fusion</a>
-  <a href="#results">Results</a>
-  <a href="#code">Code</a>
-  <a href="#conclusion">Conclusion</a>
-  <a href="#references">References</a>
-  <hr style="border: 1px solid #ddd; margin: 20px 0;" />
-  <a href="https://huggingface.co/datasets" target="_blank">📂 Dataset Used</a>
-</div>
-<div class="main">
   <div class="container">
-    <header>
-      <h1>Multimodal Few-Shot Learning with Frozen Language Models 🧠 <small>By Raparla Sushmitha</small></h1>
-      <p><em><strong>Date: 08-05-2027</strong></em></p>
-    </header>
-
-    <h2 class="section-title">Overview 📚</h2>
-    <p>
-      This project explores multimodal few-shot learning using frozen encoders. Traditional ML models rely on extensive datasets, whereas this work shows how models like CLIP can generalize with minimal data when properly fused.
-    </p>
-
-    <div class="card">
-      <h3>Highlights 💡</h3>
-      <ul>
-        <li>Efficient learning from limited examples</li>
-        <li>Frozen CLIP encoders eliminate expensive fine-tuning</li>
-        <li>Low compute requirement</li>
-        <li>Adaptable to unseen tasks</li>
-      </ul>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h1>Sushmitha035</h1>
+      <p><a href="https://github.com/Sushmitha035" target="_blank">View My GitHub Profile</a></p>
+      <hr />
+      <a href="#overview">Overview</a>
+      <a href="#few-shot">Few-Shot Learning</a>
+      <a href="#motivation">Motivation</a>
+      <a href="#fusion">Fusion</a>
+      <a href="#results">Results</a>
+      <a href="#code">Code</a>
+      <a href="#conclusion">Conclusion</a>
+      <a href="#references">References</a>
+      <hr />
+      <a href="https://huggingface.co/datasets" target="_blank">📂 Dataset Used</a>
     </div>
 
-    <h2 class="section-title">What is Few-Shot Learning🔍</h2>
-    <p>
-      Few-shot learning refers to the ability to generalize from just a handful of examples. This is crucial in domains like medical imaging or low-resource languages.
+    <!-- Main Content -->
+    <div class="main">
+      <header>
+        <h1>Multimodal Few-Shot Learning with Frozen Language Models 🧠 <small>By Raparla Sushmitha</small></h1>
+        <p><em><strong>Date: 08-05-2027</strong></em></p>
+      </header>
+
+      <h2 class="section-title" id="overview">Overview 📚</h2>
+      <p>This project explores multimodal few-shot learning using frozen encoders. Traditional ML models rely on extensive datasets, whereas this work shows how models like CLIP can generalize with minimal data when properly fused.</p>
+
+      <div class="card">
+        <h3>Highlights 💡</h3>
+        <ul>
+          <li>Efficient learning from limited examples</li>
+          <li>Frozen CLIP encoders eliminate expensive fine-tuning</li>
+          <li>Low compute requirement</li>
+          <li>Adaptable to unseen tasks</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title" id="few-shot">What is Few-Shot Learning 🔍</h2>
+      <p>Few-shot learning refers to the ability to generalize from just a handful of examples. This is crucial in domains like medical imaging or low-resource languages.</p>
+<p>
+      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
     </p>
+          </p>
 <h2 class="section-title"Combining Few-Shot Learning and Frozen Language Models 🔍</h2>
     <p>
        In this project, we combine the power of few-shot learning with frozen pre-trained language models. By using models like CLIP that are already pre-trained on vast amounts of data, we leverage their ability to handle both visual and textual data without the need for expensive retraining.
     </p>
   </p>
-<h2 class="section-title">Motivation: Why This Topic? 💭</h2>
-    <p>
-      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results. 🤔
-    </p>
-    <p>
-      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
-    </p>
     <h2 class="section-title">Fusion Strategies 🔗</h2>
     <p>
       Fusion techniques refer to combining visual and textual features. This can be early, late, or hybrid. We opted for a lightweight late fusion approach to minimize resource use.
@@ -168,8 +215,7 @@
     <p>
       While Flamingo uses a causal decoder and visual tokens, our approach sticks to frozen models and explores simpler fusion, saving compute. Compared to ALBEF, we avoid heavy vision-language pre-training.
     </p>
-</p>
-
+  </p>
     <h2 class="section-title">Key Learnings and Insights 📝</h2>
     <ul>
       <li>Frozen models are still highly effective for multimodal tasks, and they offer a more efficient alternative to fully fine-tuned models. 🌱
@@ -194,51 +240,63 @@ for shot in [1, 5, 10]:
     print(f"Running {shot}-shot training...")
     acc = trainer.run_few_shot(shot=shot)
     print(f"Accuracy for {shot}-shot: {acc}%")</code></pre>
+  
+  
+      <h2 class="section-title" id="results">Few-Shot Results on CC3M 📊</h2>
+      <p>Below are few-shot results measured on the CC3M dataset:</p>
 
- <h2 class="section-title">Few-Shot Results on CC3M 📊</h2>
-<p>Below are few-shot results measured on the CC3M dataset:</p>
 
-<table>
+
+<h2>Model Performance Comparison</h2>
+
+<table style="border-collapse: collapse; width: 50%;">
   <thead>
-    <tr><th>Shots</th><th>Frozen Head</th><th>Full Finetune</th></tr>
+    <tr>
+      <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Shots</th>
+      <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Frozen Head</th>
+      <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Full Finetune</th>
+    </tr>
   </thead>
   <tbody>
-    <tr><td>1-shot</td><td>48.7%</td><td>51.2%</td></tr>
-    <tr><td>5-shot</td><td>62.1%</td><td>64.8%</td></tr>
-    <tr><td>10-shot</td><td>69.8%</td><td>72.5%</td></tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">1-shot</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">48.7%</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">51.2%</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">5-shot</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">62.1%</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">64.8%</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">10-shot</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">69.8%</td>
+      <td style="border: 1px solid black; padding: 8px; text-align: center;">72.5%</td>
+    </tr>
   </tbody>
 </table>
+      <div class="content-between">
+        <img src="few_shot_performance.png" alt="Performance Chart">
+        <img src="few_shot_accuracy_chart.png" alt="Accuracy Chart">
+      </div>
 
-  
-    <div class="content-between">
-    <img src="few_shot_performance.png" alt="Performance Chart">
-    <img src="few_shot_accuracy_chart.png" alt="Accuracy Chart"> 
-    </div>
-
-    <h2 class="section-title">Learnings 🧠</h2>
-    <ul>
-      <li>Frozen encoders like CLIP are surprisingly versatile.</li>
-      <li>Even without tuning, strong baselines are achievable.</li>
-      <li>Fusion methods must be lightweight but expressive.</li>
-      <li>Multimodal embeddings generalize well with minimal data.</li>
-    </ul>
-
-    <h2 class="section-title">What Surprised Me 😲</h2>
+      <h2 class="section-title" id="code">Code Setup & Installation 💻</h2>
+      <pre><code>!unzip frozen-main.zip
+!pip install -q -e frozen-main</code></pre>
+ <h2 class="section-title">What Surprised Me 😲</h2>
     <ul>
       <li>Frozen models outperformed expectations, especially in the 5-shot case.</li>
       <li>Simple cosine similarity worked better than MLPs in some cases.</li>
       <li>Zero-shot performance was already competitive with few-shot SOTA.</li>
     </ul>
-
-    <h2 class="section-title">Scope for Improvement 🚀</h2>
+<h2 class="section-title">Scope for Improvement 🚀</h2>
     <ul>
       <li>Incorporating better fusion methods like gated attention mechanisms</li>
       <li>Testing on more challenging datasets such as VQA or NLVR2</li>
       <li>Introducing prompt tuning for better generalization</li>
       <li>Combining audio and video for true multimodality</li>
     </ul>
-
-    <h2 class="section-title">Full Evaluation Script 🧪</h2>
+  <h2 class="section-title">Full Evaluation Script 🧪</h2>
     <pre><code>from frozen_main.eval import evaluate_all
 
 def run_all_experiments():
@@ -246,16 +304,7 @@ def run_all_experiments():
         print(f"Evaluating {shot}-shot performance...")
         results = evaluate_all(shot=shot)
         print(results)</code></pre>
-
-    <h2 class="section-title">Conclusion & Benefits 🏁</h2>
-    <p>
-      Frozen models offer an efficient path for multimodal learning. Our findings show that high accuracy is achievable with minimal tuning.
-    </p>
-    <p>
-      This research bridges the gap between state-of-the-art models and real-world applicability in low-resource scenarios. It opens the door to accessible and efficient AI.
-    </p>
-
-    <h2 class="section-title">Bonus: Model Architecture Overview 🏗️</h2>
+<h2 class="section-title">Bonus: Model Architecture Overview 🏗️</h2>
     <pre><code>Vision Encoder (CLIP)
     |
     --> Linear Projection --> Feature Embedding
@@ -272,20 +321,21 @@ Text Encoder (CLIP)
       <li>Apply to multilingual settings for global accessibility</li>
     </ul>
 
-   <h2>📚 References</h2>
-<ul>
-    <li>For more details on CLIP, refer to the paper by Radford et al. (2021) available on arXiv: 
-        <a href="https://arxiv.org/abs/2106.13884" target="_blank">CLIP Paper - Radford et al. (2021)</a>
-    </li>
-    <li>Wang et al., “ALBEF” (ICCV ’21)</li>
-    <li>Tsimpoukelli et al., “Frozen: Learning with Frozen LMs” (2022)</li>
-    <li>Xie et al., “AdvProp” (CVPR ’20)</li>
-    <li>Huang et al., “Flamingo” (DeepMind, 2022)</li>
-</ul>
+      <h2 class="section-title" id="conclusion">Conclusion & Benefits 🏁</h2>
+      <p>Frozen models offer an efficient path for multimodal learning. Our findings show that high accuracy is achievable with minimal tuning.</p>
+      <p>This research bridges the gap between state-of-the-art models and real-world applicability in low-resource scenarios. It opens the door to accessible and efficient AI.</p>
 
-</div>
+      <h2 class="section-title" id="references">📚 References</h2>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2106.13884" target="_blank">CLIP Paper - Radford et al. (2021)</a></li>
+        <li>Wang et al., “ALBEF” (ICCV ’21)</li>
+        <li>Tsimpoukelli et al., “Frozen: Learning with Frozen LMs” (2022)</li>
+        <li>Xie et al., “AdvProp” (CVPR ’20)</li>
+        <li>Huang et al., “Flamingo” (DeepMind, 2022)</li>
+      </ul>
+
+    </div>
+  </div>
 </body>
 </html>
-
-
 
