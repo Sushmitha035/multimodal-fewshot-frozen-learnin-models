@@ -169,7 +169,8 @@
       <a href="#conclusion">Conclusion</a>
       <a href="#references">References</a>
       <hr />
-      <a href="https://huggingface.co/datasets" target="_blank">📂 Dataset Used</a>
+     <a href="https://huggingface.co/datasets/cc3m" target="_blank">📂 Dataset: CC3M</a>
+
     </div>
 
     <!-- Main Content -->
@@ -191,6 +192,18 @@
           <li>Adaptable to unseen tasks</li>
         </ul>
       </div>
+ </p>
+<h2 class="section-title">Motivation: Why This Topic? 💭</h2>
+    <p>
+      Pre-trained models like CLIP have demonstrated outstanding performance on various vision-language tasks without needing extensive fine-tuning. However, these models come with high computational costs, making them difficult to deploy in resource-constrained environments. I was intrigued by the possibility of using these models without the need for expensive fine-tuning and still achieving competitive results. 🤔
+    </p>
+    <p>
+      The primary motivation behind this project is to explore how frozen models, such as CLIP, can be used in a few-shot learning setting to perform vision-language tasks. By reducing the computational cost and making models more accessible, this project aims to push the boundaries of multimodal learning in real-world applications, where data and resources are often limited. 💪
+    </p>
+    <h2 class="section-title">Fusion Strategies 🔗</h2>
+    <p>
+      Fusion techniques refer to combining visual and textual features. This can be early, late, or hybrid. We opted for a lightweight late fusion approach to minimize resource use.
+    </p>
 
       <h2 class="section-title" id="few-shot">What is Few-Shot Learning 🔍</h2>
       <p>Few-shot learning refers to the ability to generalize from just a handful of examples. This is crucial in domains like medical imaging or low-resource languages.</p>
@@ -216,6 +229,16 @@
       While Flamingo uses a causal decoder and visual tokens, our approach sticks to frozen models and explores simpler fusion, saving compute. Compared to ALBEF, we avoid heavy vision-language pre-training.
     </p>
   </p>
+  <h2 class="section-title">📘 What I Learned From This Project</h2>
+<ul>
+  <li><strong>Understanding Frozen Models:</strong> I deepened my knowledge of how frozen models like CLIP function and their advantages in low-resource settings.</li>
+  <li><strong>Efficiency in Learning:</strong> Learned how to use few-shot learning effectively without expensive training or fine-tuning, enabling faster experimentation.</li>
+  <li><strong>Fusion Matters:</strong> Realized that even simple fusion strategies can lead to competitive performance when thoughtfully designed.</li>
+  <li><strong>Code Modularity:</strong> Building a modular and reusable codebase made it easier to tweak experiments and analyze results quickly.</li>
+  <li><strong>Balancing Performance vs. Compute:</strong> Understood the trade-offs between model performance and computational cost, especially important for real-world deployments.</li>
+  <li><strong>Importance of Evaluation:</strong> Gained experience in evaluating models across different shot settings and interpreting accuracy trends.</li>
+</ul>
+
     <h2 class="section-title">Key Learnings and Insights 📝</h2>
     <ul>
       <li>Frozen models are still highly effective for multimodal tasks, and they offer a more efficient alternative to fully fine-tuned models. 🌱
